@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Importacion AMA completa</title>
+</head>
+<body>
+<h1>COMPLETADA IMPORTACION DE AMA</h1>
+
+<h2>REGISTROS SALTADOS: {{ registros_saltados }}</h2>
+
+<h2>REGISTROS DUPLICADOS: {{ registros_duplicados }}</h2>
+
+<h2>REGISTROS INSERTADOS: {{ registros_insertados }}</h2>
+
+<h2>DETALLE REG DUPLICADOS:</h2>
+{% for detalle_duplicado in detalle_duplicados %}
+<p>{{ detalle_duplicado }}</p>
+{% endfor %}
+
+
+
+<a href="{% url "home" %}"></a>
+</body>
+</html>

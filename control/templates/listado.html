@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de llamadas</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.6/css/jquery.dataTables.css"/>
+    <style>
+        div#cont {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 80px;
+            margin-right: 80px;
+            margin-left: 80px;
+        }
+
+        footer {
+            height: 80px;
+            width: 100%;
+            display: block;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background-color: lavender;
+        }
+
+        footer h3 {
+            display: inline-block;
+            margin: 30px;
+            vertical-align: middle;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            var tabla = $('#llamadas').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/725b2a2115b/i18n/Spanish.json"
+                },
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{% url "llamadas_dt" %}",
+                "order": [[1, "desc"]],
+                "orderMulti": false,
+                "search": {
+                    "caseInsensitive": true
+                }
+            });
+
+
+            $('#llamadas')
+                    .on('xhr.dt', function (e, settings, json, xhr) {
+                        $('#cantidad_llamadas').text('CANTIDAD LLAMADAS: ' + json.total_llamadas);
+                        $('#total_minutos').text('TOTAL MINUTOS: ' + json.total_minutos);
+                    });
+
+            tabla.on('init.dt', function () {
+                // Apply the search
+                tabla.columns([2, 3, 6]).every(function () {
+                    var that = this;
+                    $('input', this.footer()).on('keyup', function () {
+                        console.log(this);
+                        if (that.search() !== this.value) {
+                            that
+                                    .search(this.value)
+                                    .draw();
+                        }
+                    });
+                });
+
+                tabla.columns([1, 4, 7]).every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+                                column.search(val).draw();
+                            });
+
+                });
+
+                $("tfoot #filtrar").on('click', function(){
+                    if ($("#desde").val() && $("#hasta").val()) {
+                        var busq = $("#desde").val()+'&&'+$("#hasta").val();
+                        tabla.column(0).search(busq).draw();
+                    }
+                    else {
+                        tabla.column(0).search("").draw();
+                    }
+                });
+
+                $.get("/api/get_tipos_llamadas_distinct/", function (data) {
+                    $.each(data, function () {
+                        $("tfoot select:first").append('<option value="' + this + '">' + this + '</option>');
+                    });
+                }, "json");
+
+                $("tfoot select:nth-of-type(2)").append('<option value="true">SI</option>');
+
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="cont">
+    <table id="llamadas" class="display">
+        <thead>
+        <tr>
+            <th>Fecha-Hora</th>
+            <th>Tipo</th>
+            <th>Número A</th>
+            <th>Número B</th>
+            <th>Celular?</th>
+            <th>Duración</th>
+            <th>Clave</th>
+            <th>Corredor</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+        <tr>
+            <th>
+                <input style="display: block;" type="text" id="desde" name="desde" placeholder="Fecha desde">
+                <input style="display: block;" type="text" id="hasta" name="hasta" placeholder="Fecha hasta">
+                <button style="display: block;margin: auto;" type="button" id="filtrar">Filtrar</button>
+            </th>
+            <th><input type="text" placeholder="Busca Tipo"/></th>
+            <th><input type="text" placeholder="Busca A"/></th>
+            <th><input type="text" placeholder="Busca B"/></th>
+            <th><input type="text" placeholder="Busca Cel"/></th>
+            <th></th>
+            <th><input type="text" placeholder="Busca Clave"/></th>
+            <th><input type="text" placeholder="Busca Corredor"/></th>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<footer>
+    <h3 id="cantidad_llamadas"></h3>
+
+    <h3 id="total_minutos"></h3>
+</footer>
+</body>
+</html>

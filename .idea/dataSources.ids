@@ -1,0 +1,1808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - @alpha" uuid="7ec94323-ce26-4b7c-8a7a-0901d559a702">
+    <database-info product="MySQL" version="5.5.47-0ubuntu0.14.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="controlll"/>
+    <schema name="" catalog="ersep"/>
+    <table name="auth_group" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="80" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="auth_group_permissions_group_id_58c48ba9_fk_auth_group_id" table="auth_group_permissions" schema="" catalog="controlll" columns="group_id"/>
+      <exported-key name="auth_user_groups_group_id_30a071c9_fk_auth_group_id" table="auth_user_groups" schema="" catalog="controlll" columns="group_id"/>
+      <index name="name" unique="true" columns="name"/>
+    </table>
+    <table name="auth_group_permissions" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="group_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="permission_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="auth_group_permissions_group_id_58c48ba9_fk_auth_group_id" columns="group_id" ref-table="auth_group" ref-schema="" ref-catalog="controlll" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="auth_group_permissi_permission_id_23962d04_fk_auth_permission_id" columns="permission_id" ref-table="auth_permission" ref-schema="" ref-catalog="controlll" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="group_id" unique="true" columns="permission_id"/>
+      <index name="auth_group_permissi_permission_id_23962d04_fk_auth_permission_id" unique="false" columns="permission_id"/>
+    </table>
+    <table name="auth_permission" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="content_type_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="codename" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="auth_permissi_content_type_id_51277a81_fk_django_content_type_id" columns="content_type_id" ref-table="django_content_type" ref-schema="" ref-catalog="controlll" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="auth_group_permissi_permission_id_23962d04_fk_auth_permission_id" table="auth_group_permissions" schema="" catalog="controlll" columns="permission_id"/>
+      <exported-key name="auth_user_user_perm_permission_id_3d7071f0_fk_auth_permission_id" table="auth_user_user_permissions" schema="" catalog="controlll" columns="permission_id"/>
+      <index name="content_type_id" unique="true" columns="codename"/>
+    </table>
+    <table name="auth_user" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="password" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_login" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="is_superuser" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="username" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="first_name" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="254" scale="0" nullable="false" jdbcType="12"/>
+      <column name="is_staff" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="is_active" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="date_joined" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="auth_user_groups_user_id_24702650_fk_auth_user_id" table="auth_user_groups" schema="" catalog="controlll" columns="user_id"/>
+      <exported-key name="auth_user_user_permissions_user_id_7cd7acb6_fk_auth_user_id" table="auth_user_user_permissions" schema="" catalog="controlll" columns="user_id"/>
+      <exported-key name="django_admin_log_user_id_1c5f563_fk_auth_user_id" table="django_admin_log" schema="" catalog="controlll" columns="user_id"/>
+      <index name="username" unique="true" columns="username"/>
+    </table>
+    <table name="auth_user_groups" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="group_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="auth_user_groups_group_id_30a071c9_fk_auth_group_id" columns="group_id" ref-table="auth_group" ref-schema="" ref-catalog="controlll" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="auth_user_groups_user_id_24702650_fk_auth_user_id" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="controlll" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="user_id" unique="true" columns="group_id"/>
+      <index name="auth_user_groups_group_id_30a071c9_fk_auth_group_id" unique="false" columns="group_id"/>
+    </table>
+    <table name="auth_user_user_permissions" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="permission_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="auth_user_user_permissions_user_id_7cd7acb6_fk_auth_user_id" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="controlll" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="auth_user_user_perm_permission_id_3d7071f0_fk_auth_permission_id" columns="permission_id" ref-table="auth_permission" ref-schema="" ref-catalog="controlll" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="user_id" unique="true" columns="permission_id"/>
+      <index name="auth_user_user_perm_permission_id_3d7071f0_fk_auth_permission_id" unique="false" columns="permission_id"/>
+    </table>
+    <table name="control_datosimportantes" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ultima_importacion_ama" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="ultima_importacion_lama" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="ultima_importacion_telco" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="control_llamada" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="fecha_hora" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="tipo" sqlType="VARCHAR" precision="2" scale="0" nullable="false" jdbcType="12"/>
+      <column name="celular" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="numero_a" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="numero_b" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="duracion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="clave" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="corredor" sqlType="VARCHAR" precision="2" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="control_prefijo" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="localidad" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="modalidad" sqlType="VARCHAR" precision="3" scale="0" nullable="false" jdbcType="12"/>
+      <column name="bloque" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="caracteristica" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="completo" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="django_admin_log" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="action_time" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="object_id" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="object_repr" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="action_flag" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5"/>
+      <column name="change_message" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="content_type_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="django_admin_log_user_id_1c5f563_fk_auth_user_id" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="controlll" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="django_admin__content_type_id_5151027a_fk_django_content_type_id" columns="content_type_id" ref-table="django_content_type" ref-schema="" ref-catalog="controlll" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="django_admin__content_type_id_5151027a_fk_django_content_type_id" unique="false" columns="content_type_id"/>
+      <index name="django_admin_log_user_id_1c5f563_fk_auth_user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="django_content_type" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="app_label" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="model" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="auth_permissi_content_type_id_51277a81_fk_django_content_type_id" table="auth_permission" schema="" catalog="controlll" columns="content_type_id"/>
+      <exported-key name="django_admin__content_type_id_5151027a_fk_django_content_type_id" table="django_admin_log" schema="" catalog="controlll" columns="content_type_id"/>
+      <index name="django_content_type_app_label_3ec8c61c_uniq" unique="true" columns="app_label,model"/>
+    </table>
+    <table name="django_migrations" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="app" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="applied" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="django_session" schema="" catalog="controlll" type="TABLE">
+      <column name="session_key" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>
+      <column name="session_data" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="expire_date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="session_key"/>
+      <index name="django_session_de54fa62" unique="false" columns="expire_date"/>
+    </table>
+    <table name="wwcontrol_prefijo" schema="" catalog="controlll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="localidad" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="modalidad" sqlType="VARCHAR" precision="3" scale="0" nullable="false" jdbcType="12"/>
+      <column name="bloque" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="caracteristica" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="completo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="table_name" schema="" catalog="ersep" type="TABLE">
+      <column name="cnro" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+  </data-source>
+  <data-source name="MySQL - @PREPAGO" uuid="a7c29156-3c7f-4425-b5ad-66927c42e530">
+    <database-info product="MySQL" version="5.0.27-community-nt-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="energia"/>
+    <table name="actali" schema="" catalog="energia" type="TABLE">
+      <column name="condicion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="condicion,alicuota"/>
+    </table>
+    <table name="actcargo" schema="" catalog="energia" type="TABLE">
+      <column name="proceso" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cantterren" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipoproc" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="proceso" unique="false" columns="proceso"/>
+      <index name="promesanio" unique="false" columns="proceso,mes,anio"/>
+    </table>
+    <table name="afip_alicuotasxitem" schema="" catalog="energia" type="TABLE">
+      <column name="identify" sqlType="CHAR" precision="2" scale="0" nullable="true" jdbcType="1"/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cesp" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="identify" unique="false" columns="identify"/>
+      <index name="identify2" unique="false" columns="identify,tipo,sucursal,numero"/>
+      <index name="identify3" unique="false" columns="identify,tipo,sucursal,numero,item"/>
+      <index name="identify4" unique="false" columns="identify,tipo,sucursal,numero,item,alicuota"/>
+    </table>
+    <table name="afip_cabecera" schema="" catalog="energia" type="TABLE">
+      <column name="identify" sqlType="CHAR" precision="2" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="tarifa" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="total" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="nota" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="canttar" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="credito" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="succre" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numcre" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="forzada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="nserie1" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nserie2" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="nserie3" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="grupo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sumi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="totaldec" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="especial" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="recibo" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero_cui" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="ing_brutos" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="tipocarene" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="numcarene" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="impresa" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="debcf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="impdebcf" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="crecf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="bonklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impenergia" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="pdaproc" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="factura" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="valdeuda" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cfley9165" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="eley9165" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="importeres" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="klwres" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="venpendiente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="vending" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="klwdev" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="nombre" sqlType="CHAR" precision="50" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="domiciliocliente" sqlType="CHAR" precision="50" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="domicilioterreno" sqlType="CHAR" precision="50" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="localidad" sqlType="CHAR" precision="50" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="barrio" sqlType="CHAR" precision="50" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="provincia" sqlType="CHAR" precision="40" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="cpostal" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tipncre" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucfac" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numfac" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="gravado" sqlType="DOUBLE" precision="15" scale="3" nullable="true" jdbcType="8" def="MC4wMDA="/>
+      <column name="cesp" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="nogravado" sqlType="DOUBLE" precision="15" scale="3" nullable="true" jdbcType="8" def="MC4wMDA="/>
+    </table>
+    <table name="afip_detalle" schema="" catalog="energia" type="TABLE">
+      <column name="identify" sqlType="CHAR" precision="2" scale="0" nullable="true" jdbcType="1"/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cesp" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="identify" unique="false" columns="identify"/>
+      <index name="identify2" unique="false" columns="identify,tipo,sucursal,numero"/>
+      <index name="identify3" unique="false" columns="identify,tipo,sucursal,numero,item"/>
+    </table>
+    <table name="afip_seteos" schema="" catalog="energia" type="TABLE">
+      <column name="vencimiento" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="cesp" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="procesado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+    </table>
+    <table name="alicuota" schema="" catalog="energia" type="TABLE">
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="40" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="porcentaje" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="abrevia" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="cuenta" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="alicuota" unique="false" columns="alicuota"/>
+    </table>
+    <table name="auditar" schema="" catalog="energia" type="TABLE">
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="estacion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="modulo" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="contenido" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="accion" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <index name="IX_auditar" unique="false" columns="usuario"/>
+    </table>
+    <table name="autoriza" schema="" catalog="energia" type="TABLE">
+      <column name="autlicencia" sqlType="CHAR" precision="50" scale="0" nullable="false" jdbcType="1" def="Jyc="/>
+      <column name="autcodigo" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1"/>
+    </table>
+    <table name="auxiliar" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sigla" sqlType="CHAR" precision="3" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="desc_" unique="false" columns="descrip,tipo"/>
+      <index name="tipcod" unique="false" columns="codigo,tipo"/>
+    </table>
+    <table name="ayuda" schema="" catalog="energia" type="TABLE">
+      <column name="modulo" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="topico" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="contenido" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <index name="modulo" unique="false" columns="modulo"/>
+      <index name="topico" unique="false" columns="topico"/>
+    </table>
+    <table name="bancos" schema="" catalog="energia" type="TABLE">
+      <column name="banco" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nombre" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="direccion" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="localida" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="telfax" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="observa" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <index name="banco" unique="false" columns="banco"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+    </table>
+    <table name="barcodeaudit" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="total" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="nserie1" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nserie2" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="nserie3" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="grupo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sumi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="codigo" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="razon" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="domicilio" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <index name="cliente" unique="false" columns="cliente"/>
+      <index name="fecha" unique="false" columns="fecha"/>
+      <index name="termesano" unique="false" columns="terreno,fecha"/>
+      <index name="terreno" unique="false" columns="terreno"/>
+      <index name="tipsucnum" unique="false" columns="tipo,sucursal,numero"/>
+      <index name="tipsucnumc" unique="false" columns="sucursal,cliente,numero,tipo"/>
+    </table>
+    <table name="cajas" schema="" catalog="energia" type="TABLE">
+      <column name="nrocja" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="ultnromov" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="abierta" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="quien" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="planilla" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="activa" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="abrevia" sqlType="CHAR" precision="3" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="descrip" unique="false" columns="descrip"/>
+      <index name="nrocja" unique="false" columns="nrocja"/>
+    </table>
+    <table name="cajero" schema="" catalog="energia" type="TABLE">
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cfijona" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cfijonb" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nfijene" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numeracion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="impmin" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="timeseg" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="puertob" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="baudiosb" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="puertol" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="baudiosl" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="lptticket" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="renglonc1" sqlType="CHAR" precision="33" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="renglonc2" sqlType="CHAR" precision="33" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="renglonc3" sqlType="CHAR" precision="33" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="renglonc4" sqlType="CHAR" precision="33" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="renglonf1" sqlType="CHAR" precision="33" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="renglonf2" sqlType="CHAR" precision="33" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="largor" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="largot" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cantt" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="puntor" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="caja" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="carene" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="secsup" sqlType="CHAR" precision="5" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tickeadora" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="cambter" schema="" catalog="energia" type="TABLE">
+      <column name="cambter" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anterior" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="nuevo" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="anterior" unique="false" columns="anterior"/>
+      <index name="cambter" unique="false" columns="cambter"/>
+    </table>
+    <table name="canpar" schema="" catalog="energia" type="TABLE">
+      <column name="canpar" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="letra" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="pagcuo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="canpar" unique="false" columns="canpar"/>
+    </table>
+    <table name="cecor" schema="" catalog="energia" type="TABLE">
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecvalcec" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="impvalcec" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="obscecor" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="tipbono" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="codigo" unique="false" columns="codigo"/>
+    </table>
+    <table name="cheques" schema="" catalog="energia" type="TABLE">
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fechaentra" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="banco" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numeroche" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="titular" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="vence" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="fechasalir" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="entidad" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="bancodep" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cuentadep" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="codigo" unique="false" columns="codigo"/>
+    </table>
+    <table name="cjausu" schema="" catalog="energia" type="TABLE">
+      <column name="nrocja" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="clientes" schema="" catalog="energia" type="TABLE">
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="razon" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="domicilio" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="barrio" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="localida" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="telfax" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="observa" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="estado" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fechaing" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="barusuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="secusuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="vencuenta" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="venseguridad" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="newclicod" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <index name="barusuario" unique="false" columns="barusuario"/>
+      <index name="cliente" unique="false" columns="cliente"/>
+      <index name="razon" unique="false" columns="razon"/>
+    </table>
+    <table name="conagua" schema="" catalog="energia" type="TABLE">
+      <column name="conagua" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="year" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="agua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="estacion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="facturado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="imporagu" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="error" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="nromedagua" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="cuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="conagua" unique="false" columns="conagua"/>
+      <index name="mesyear" unique="false" columns="year,mes"/>
+      <index name="terper" unique="false" columns="terreno,year,mes"/>
+    </table>
+    <table name="condiva" schema="" catalog="energia" type="TABLE">
+      <column name="condicion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="abrevia" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="condicion" unique="false" columns="condicion"/>
+      <index name="descrip" unique="false" columns="descrip"/>
+    </table>
+    <table name="condtar" schema="" catalog="energia" type="TABLE">
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="condicion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="tarconite" unique="false" columns="condicion,tarifa,item"/>
+    </table>
+    <table name="condtarp" schema="" catalog="energia" type="TABLE">
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="condicion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="cliterite" unique="false" columns="cliente,terreno,item"/>
+      <index name="ttci" unique="false" columns="condicion,terreno,tarifa,item"/>
+    </table>
+    <table name="config" schema="" catalog="energia" type="TABLE">
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cfijona" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cfijonb" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="energiana" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="energianb" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="ncreditoa" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="ncreditob" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nfijene" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="ncredito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="canttar" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numeracion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="limitepot" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="voltage" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="deuda" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="stsnt" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="stsmc" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="aegmc" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="impmin" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="pantfac" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="permono" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="veritar" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="renglon1" sqlType="CHAR" precision="76" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="renglon2" sqlType="CHAR" precision="76" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="renglon3" sqlType="CHAR" precision="76" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="timenc" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="timfec" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="timimp" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="timklw" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="timsoc" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="timnom" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="timter" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="timfac" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="impfacnc" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="tipescc" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipesce" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="carene" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="tipoescite" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="recibox" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tracf" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="dia" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="pathser" sqlType="CHAR" precision="50" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="lockdeuda" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="lockmsg" sqlType="CHAR" precision="100" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="calagu" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="recibocf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+    </table>
+    <table name="confrep" schema="" catalog="energia" type="TABLE">
+      <column name="cfijo" sqlType="CHAR" precision="150" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="energia" sqlType="CHAR" precision="150" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="ncredito" sqlType="CHAR" precision="150" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="ncreditok" sqlType="CHAR" precision="150" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="iva" sqlType="CHAR" precision="150" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="recibo" sqlType="CHAR" precision="150" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="recibocta" sqlType="CHAR" precision="150" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="recibocf" sqlType="CHAR" precision="150" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="conreal" schema="" catalog="energia" type="TABLE">
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="year" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="consumo" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="teryearmes" unique="false" columns="terreno,year,mes"/>
+    </table>
+    <table name="cplanes" schema="" catalog="energia" type="TABLE">
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="item" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="cantcuotas" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="pagcuotas" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="valcuota" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="total" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="desc_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="porcentaje" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impdesc" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cancelada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="observa" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="motdeu" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="coddeuda" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="convenio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fechaini" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <index name="cliente" unique="false" columns="cliente"/>
+      <index name="plan_" unique="false" columns="plan_"/>
+    </table>
+    <table name="crecf" schema="" catalog="energia" type="TABLE">
+      <column name="credito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="debito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="anulado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="nota" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="manual" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="credito" unique="false" columns="credito"/>
+      <index name="debito" unique="false" columns="debito"/>
+    </table>
+    <table name="creditos" schema="" catalog="energia" type="TABLE">
+      <column name="credito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="nota" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="anulado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="credito" unique="false" columns="credito"/>
+    </table>
+    <table name="cticket" schema="" catalog="energia" type="TABLE">
+      <column name="renglon1" sqlType="CHAR" precision="22" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="renglon2" sqlType="CHAR" precision="22" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="renglon3" sqlType="CHAR" precision="22" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="renglon4" sqlType="CHAR" precision="22" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="debcf" schema="" catalog="energia" type="TABLE">
+      <column name="debito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="proceso" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="pagado" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="saldo" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <index name="debito" unique="false" columns="debito"/>
+    </table>
+    <table name="debcre" schema="" catalog="energia" type="TABLE">
+      <column name="debito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="credito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importeori" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="importepag" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="anulado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+    </table>
+    <table name="debcrecf" schema="" catalog="energia" type="TABLE">
+      <column name="debito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="credito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importeori" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="importepag" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="anulado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+    </table>
+    <table name="debitos" schema="" catalog="energia" type="TABLE">
+      <column name="debito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipodeb" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="vence" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="observa" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="pagado" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="saldo" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <index name="debito" unique="false" columns="debito"/>
+    </table>
+    <table name="devolucionklw" schema="" catalog="energia" type="TABLE">
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="facturado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="terreno" unique="false" columns="terreno"/>
+    </table>
+    <table name="dolares" schema="" catalog="energia" type="TABLE">
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecvaldol" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="impvaldol" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="obsdolares" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <index name="codigo" unique="false" columns="codigo"/>
+    </table>
+    <table name="enedeb" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="debito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="credito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="tsnd" unique="false" columns="sucursal,numero,debito,tipo"/>
+    </table>
+    <table name="escace" schema="" catalog="energia" type="TABLE">
+      <column name="escalon" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="costo" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <index name="escalon" unique="false" columns="escalon"/>
+      <index name="tariteklw" unique="false" columns="tarifa,item,klw"/>
+    </table>
+    <table name="escacep" schema="" catalog="energia" type="TABLE">
+      <column name="escalon" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="costo" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <index name="cttik" unique="false" columns="cliente,terreno,tarifa,item,klw"/>
+      <index name="escalon" unique="false" columns="escalon"/>
+    </table>
+    <table name="escalon" schema="" catalog="energia" type="TABLE">
+      <column name="escalon" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="costo" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="limite" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="limitecf" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="excedente" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="resolucion" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="resolucion2" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="resolucionresta" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="resolucion3" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <index name="escalon" unique="false" columns="escalon"/>
+      <index name="tarklw" unique="false" columns="tarifa,klw"/>
+    </table>
+    <table name="escalona" schema="" catalog="energia" type="TABLE">
+      <column name="escalon" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="consumo" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="costo" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <index name="escalon" unique="false" columns="escalon"/>
+      <index name="taragua" unique="false" columns="consumo,tarifa"/>
+    </table>
+    <table name="escitem" schema="" catalog="energia" type="TABLE">
+      <column name="escalon" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <index name="escitem" unique="false" columns="escalon,item"/>
+    </table>
+    <table name="estacio" schema="" catalog="energia" type="TABLE">
+      <column name="estacion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nombre" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="printer" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="observa" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="dirsm" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="tim" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="tim2" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="tim3" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="titim" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="setcp" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="setms" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="sch" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="printerc" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="barcodeven" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <index name="estacion" unique="false" columns="estacion"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+    </table>
+    <table name="forpag" schema="" catalog="energia" type="TABLE">
+      <column name="forpag" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="aper" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="descrip" unique="false" columns="descrip"/>
+      <index name="forpag" unique="false" columns="forpag"/>
+    </table>
+    <table name="frecdesc" schema="" catalog="energia" type="TABLE">
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="per" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="frecuencia" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="procesado" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+    </table>
+    <table name="genmod" schema="" catalog="energia" type="TABLE">
+      <column name="codigo" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+    </table>
+    <table name="grupossumi" schema="" catalog="energia" type="TABLE">
+      <column name="grupo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sumi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="hcajero" schema="" catalog="energia" type="TABLE">
+      <column name="sesion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="proceso" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="letra" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="nombre" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="ctarjeta" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="total" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+    </table>
+    <table name="headcar" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="tarifa" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="total" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="nota" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="credito" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="succre" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numcre" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="agua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="alumbrado" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="recibo" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero_cui" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="ing_brutos" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="tipocarene" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="antagua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="debcf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cobradocf" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="lecagua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="lecantagua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="marcabri" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cesp" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="cespvence" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <index name="debcf" unique="false" columns="debcf"/>
+      <index name="tipsucnum" unique="false" columns="sucursal,numero,tipo"/>
+    </table>
+    <table name="headene" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="tarifa" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="total" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="nota" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="canttar" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="credito" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="succre" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numcre" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="forzada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="nserie1" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nserie2" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="nserie3" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="grupo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sumi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="totaldec" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="especial" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="recibo" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero_cui" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="ing_brutos" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="tipocarene" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="numcarene" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="impresa" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="debcf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="impdebcf" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="crecf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="bonklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impenergia" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="pdaproc" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="factura" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="valdeuda" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cfley9165" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="eley9165" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="marcabri" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="importeres" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="klwres" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="venpendiente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="vending" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="klwdev" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="cesp" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="cespvence" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <index name="cliente" unique="false" columns="cliente"/>
+      <index name="fecha" unique="false" columns="fecha"/>
+      <index name="termesano" unique="false" columns="terreno,fecha"/>
+      <index name="tipsucnum" unique="false" columns="tipo,sucursal,numero"/>
+      <index name="tipsucnumc" unique="false" columns="sucursal,cliente,numero,tipo"/>
+    </table>
+    <table name="headncre" schema="" catalog="energia" type="TABLE">
+      <column name="tipncre" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sucfac" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numfac" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sucfaccar" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numfaccar" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="tarifa" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="total" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="nota" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="detalle" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="especial" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero_cui" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="ing_brutos" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="tipocarene" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="noreprocf" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="marcabri" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="vending" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="cesp" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="cespvence" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <index name="fecha" unique="false" columns="fecha"/>
+      <index name="tipsucnum" unique="false" columns="sucursal,tipncre,numero,tipo"/>
+    </table>
+    <table name="imporagu" schema="" catalog="energia" type="TABLE">
+      <column name="imporagu" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="estacion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cantlect" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="archivo" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="indexar" schema="" catalog="energia" type="TABLE">
+      <column name="indice" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="indiceval" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="vigente" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="fechaini" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="horaini" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="estacion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fechafin" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="horafin" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="indices" schema="" catalog="energia" type="TABLE">
+      <column name="tabla" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="nomind" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="expresion" sqlType="CHAR" precision="100" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="items" schema="" catalog="energia" type="TABLE">
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="descrip" sqlType="CHAR" precision="40" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tipo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cuenta" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="abrevia" sqlType="CHAR" precision="7" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="descrip" unique="false" columns="descrip"/>
+      <index name="item" unique="false" columns="item"/>
+    </table>
+    <table name="itemtar" schema="" catalog="energia" type="TABLE">
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="tipo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="valagua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cantfac" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cantgen" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sobreesc" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cfley" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="resta" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="frecuencia" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="taritem" unique="false" columns="tarifa,item"/>
+    </table>
+    <table name="ivamovc" schema="" catalog="energia" type="TABLE">
+      <column name="renglon" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="tipfacene" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="numfacene" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="debcf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cobradocf" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="MARCABRI" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cesp" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <index name="tipsucnum" unique="false" columns="sucursal,numero,tipo"/>
+      <index name="tipsucnuma" unique="false" columns="sucursal,alicuota,numero,tipo"/>
+      <index name="tsni" unique="false" columns="sucursal,numero,tipo,item"/>
+      <index name="tsnip" unique="false" columns="sucursal,numero,porali,tipo,item"/>
+    </table>
+    <table name="ivamove" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="pdaproc" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="factura" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="marcabri" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cesp" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <index name="tipsucnum" unique="false" columns="sucursal,numero,tipo"/>
+      <index name="tipsucnuma" unique="false" columns="sucursal,alicuota,numero,tipo"/>
+      <index name="tsni" unique="false" columns="sucursal,numero,tipo,item"/>
+      <index name="tsnia" unique="false" columns="sucursal,alicuota,numero,tipo,item"/>
+      <index name="tsnip" unique="false" columns="sucursal,numero,porali,tipo,item"/>
+    </table>
+    <table name="ivamovnc" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cesp" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <index name="tsni" unique="false" columns="sucursal,numero,tipo,item"/>
+      <index name="tsnip" unique="false" columns="sucursal,numero,porali,tipo,item"/>
+    </table>
+    <table name="ivaplan" schema="" catalog="energia" type="TABLE">
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+    </table>
+    <table name="kcrlog" schema="" catalog="energia" type="TABLE">
+      <column name="kcrdate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="kcrtime" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="edmanucode" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="meterserno" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="ednchksum" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="krn" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="kct" sqlType="CHAR" precision="40" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="kcc" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="lastesc" schema="" catalog="energia" type="TABLE">
+      <column name="movimiento" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="fecha" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <index name="movimiento" unique="false" columns="movimiento"/>
+      <index name="terreno" unique="false" columns="terreno"/>
+    </table>
+    <table name="localida" schema="" catalog="energia" type="TABLE">
+      <column name="localida" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nombre" sqlType="CHAR" precision="40" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="provincia" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cpostal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="localida" unique="false" columns="localida"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+    </table>
+    <table name="logauto" schema="" catalog="energia" type="TABLE">
+      <column name="logauto" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="razon" sqlType="CHAR" precision="40" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="domicilio" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="total" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="usunom" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="motivo" sqlType="CHAR" precision="40" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="mcajero" schema="" catalog="energia" type="TABLE">
+      <column name="sesion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="proceso" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="46" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="importe" sqlType="CHAR" precision="12" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="modulos" schema="" catalog="energia" type="TABLE">
+      <column name="modulo" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="descrip" sqlType="CHAR" precision="50" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="modulo" unique="false" columns="modulo"/>
+    </table>
+    <table name="motdeu" schema="" catalog="energia" type="TABLE">
+      <column name="motdeu" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="activo" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="descrip" unique="false" columns="descrip"/>
+      <index name="motdeu" unique="false" columns="motdeu"/>
+    </table>
+    <table name="movcargo" schema="" catalog="energia" type="TABLE">
+      <column name="renglon" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="movimiento" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="punitario" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="descuento" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="desimporte" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="alumbrado" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="agua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="recibo" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipfacene" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="numfacene" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="coddeuda" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="convenio" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="pagcuo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="debcf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cobradocf" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="cohefi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cohefival" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="metros" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cuotaver" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="marcabri" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cesp" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <index name="movimiento" unique="false" columns="movimiento"/>
+      <index name="tipsucnum" unique="false" columns="tipo,sucursal,numero"/>
+      <index name="tipsucnuma" unique="false" columns="tipo,sucursal,numero,alicuota"/>
+      <index name="tipsucnumi" unique="false" columns="tipo,sucursal,numero,item"/>
+    </table>
+    <table name="movcja" schema="" catalog="energia" type="TABLE">
+      <column name="nrocja" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="planilla" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nromov" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tipmov" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="concepto" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="obs" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="quien" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="forpag" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="pdaproc" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="factura" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="marcabri" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="letra" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="vending" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="nromov" unique="false" columns="nrocja,nromov"/>
+    </table>
+    <table name="movene" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porimp" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="porali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="iva" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="pordeu" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="recibo" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="coddeuda" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="convenio" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="cohefi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cohefival" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="metros" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="bonklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="pdaproc" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="factura" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="marcabri" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="venpendiente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="vending" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="klwdev" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="cesp" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <index name="fecha" unique="false" columns="fecha"/>
+      <index name="IX_movene" unique="false" columns="terreno,anio,mes"/>
+      <index name="tipsucnum" unique="false" columns="sucursal,numero,tipo"/>
+      <index name="tipsucnuma" unique="false" columns="sucursal,alicuota,numero,tipo"/>
+      <index name="tipsucnumi" unique="false" columns="sucursal,numero,tipo,item"/>
+    </table>
+    <table name="movncre" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="klw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porimp" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="porali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="iva" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="coddeuda" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="convenio" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="bonklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cesp" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <index name="fecha" unique="false" columns="fecha"/>
+      <index name="tipsucnum" unique="false" columns="sucursal,numero,tipo"/>
+      <index name="tipsucnuma" unique="false" columns="sucursal,alicuota,numero,tipo"/>
+      <index name="tipsucnumi" unique="false" columns="sucursal,numero,tipo,item"/>
+    </table>
+    <table name="movrec" schema="" catalog="energia" type="TABLE">
+      <column name="credito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="debito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipodeb" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="anulado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="credito" unique="false" columns="credito"/>
+    </table>
+    <table name="movtar" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fecha" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="orden" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="segundos" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="codigo" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="cseg" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cantidad" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="tipsucnumo" unique="false" columns="sucursal,numero,orden,tipo"/>
+    </table>
+    <table name="numcajer" schema="" catalog="energia" type="TABLE">
+      <column name="proceso" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sesion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+    </table>
+    <table name="numeros" schema="" catalog="energia" type="TABLE">
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="localida" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="banco" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tarjeta" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="item" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="proceso" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="movimiento" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="escalon" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="printer" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="motdeu" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="conagua" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="escalona" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cambter" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="historic" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="canpar" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="escace" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="escacep" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="carene" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipodeb" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="debito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="credito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="coddeuda" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="debcf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="crecf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+    </table>
+    <table name="pertarif" schema="" catalog="energia" type="TABLE">
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="tipo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="valagua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cantfac" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cantgen" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="resta" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="frecuencia" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="teritem" unique="false" columns="terreno,item"/>
+      <index name="tertarite" unique="false" columns="terreno,tarifa,item"/>
+    </table>
+    <table name="planes" schema="" catalog="energia" type="TABLE">
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="item" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="cantcuotas" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="pagcuotas" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="valcuota" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="total" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="desc_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="porcentaje" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impdesc" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cancelada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="observa" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="motdeu" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="coddeuda" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="convenio" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="fechaini" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="indexar" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cohefi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cohefival" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cantcuover" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="planrel" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="pagcuover" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="plan_" unique="false" columns="plan_"/>
+    </table>
+    <table name="printers" schema="" catalog="energia" type="TABLE">
+      <column name="printer" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nombre" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="normal" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="chica" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="observa" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+      <index name="printer" unique="false" columns="printer"/>
+    </table>
+    <table name="procali" schema="" catalog="energia" type="TABLE">
+      <column name="proceso" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="movimiento" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="ivaconf" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+    </table>
+    <table name="procargo" schema="" catalog="energia" type="TABLE">
+      <column name="proceso" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="movimiento" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="plan_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="porali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impali" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="iva" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="facturado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cuotacfijo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cantcuotas" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="credito" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="tipcre" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="succre" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numcre" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="agua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="alumbrado" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cantfac" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="per" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero_cui" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="ing_brutos" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="coddeuda" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="convenio" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="antagua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="debcf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipoproc" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="eliminado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cohefi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cohefival" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="metros" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cuotaver" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="aguareal" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <index name="cliter" unique="false" columns="cliente,terreno"/>
+      <index name="ctpc" unique="false" columns="cuotacfijo,proceso,cliente,terreno"/>
+      <index name="movimiento" unique="false" columns="movimiento"/>
+      <index name="promesanioter" unique="false" columns="proceso,mes,anio,terreno"/>
+      <index name="teraniomes" unique="false" columns="terreno,anio,mes"/>
+    </table>
+    <table name="resetklw" schema="" catalog="energia" type="TABLE">
+      <column name="proceso" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="mes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anio" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="mesklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="antmesklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="facturado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="amt" unique="false" columns="terreno,anio,mes"/>
+    </table>
+    <table name="results" schema="" catalog="energia" type="TABLE">
+      <column name="condicion" sqlType="DECIMAL" precision="2" scale="0" nullable="false" jdbcType="3" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="30" scale="0" nullable="false" jdbcType="1" def="Jyc="/>
+      <column name="abrevia" sqlType="CHAR" precision="10" scale="0" nullable="false" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="segcaj" schema="" catalog="energia" type="TABLE">
+      <column name="caja" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+    </table>
+    <table name="semaforo" schema="" catalog="energia" type="TABLE">
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tipo" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="data" sqlType="CHAR" precision="50" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="who" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="td" unique="false" columns="tipo,data"/>
+    </table>
+    <table name="subdiari" schema="" catalog="energia" type="TABLE">
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="descrip" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="iva" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="alicuota" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="codigo" unique="false" columns="codigo"/>
+      <index name="item" unique="false" columns="item"/>
+    </table>
+    <table name="tarifas" schema="" catalog="energia" type="TABLE">
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="descrip" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="activa" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="CHAR" precision="8" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="minklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="mincosto" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="maxklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="maxcosto" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="fuego" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="fuegoexe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="fuegoklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cfley" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="exeley" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="leyactiva" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cfley2" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cfactivo" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cfklw2" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="leyklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porenepor" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porenemin" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porenemax" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="exeenergia" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="itemres" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="fuegoklw11" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="fuegoklw12" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="fuegoklw21" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="fuegoklw22" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="fuegoklw31" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="fuegoklw32" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="fuegoexe1" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <index name="descrip" unique="false" columns="descrip"/>
+      <index name="tarifa" unique="false" columns="tarifa"/>
+    </table>
+    <table name="tarjeta" schema="" catalog="energia" type="TABLE">
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tarjeta" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nrotarjeta" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="nrocupon" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecdesde" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="fechasta" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="autoriza" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cuotas" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="obstarjeta" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <index name="codigo" unique="false" columns="codigo"/>
+    </table>
+    <table name="tarjetas" schema="" catalog="energia" type="TABLE">
+      <column name="tarjeta" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nombre" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="activa" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="nombre" unique="false" columns="nombre"/>
+      <index name="tarjeta" unique="false" columns="tarjeta"/>
+    </table>
+    <table name="tarpor" schema="" catalog="energia" type="TABLE">
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="itempor" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="taritepor" unique="false" columns="itempor,tarifa,item"/>
+    </table>
+    <table name="tarporp" schema="" catalog="energia" type="TABLE">
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tarifa" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="itempor" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="tertaritep" unique="false" columns="terreno,itempor,tarifa,item"/>
+    </table>
+    <table name="terrenos" schema="" catalog="energia" type="TABLE">
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero_cui" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="ing_brutos" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="domicilio" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="barrio" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="observa" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="estado" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="fechaing" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="tarifa" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="tipomed" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nserie1" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nserie2" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="nserie3" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="limitep" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="instala" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="idali" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fase" sqlType="CHAR" precision="2" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="idminisub" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="cseg" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="grupo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sumi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="indicet" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="per" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="proceso" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="krn" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="kcf" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="kct" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="ultventa" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="ultklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="mesklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="maxklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="credito" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cuotas" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="bloqueado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="habilcuota" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="contrato" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="agua" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="alumbrado" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="antmesklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="lockdeuda" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="antagua" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="cfctacte" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="plano" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="zona" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nromedagua" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="consumoest" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="bonklw" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="fuego" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="fuegoexe" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="ley9165" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cfley9165" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="eley9165" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="porenepor" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porenemin" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="porenemax" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="fuegoexe1" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="vencuenta" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="venseguridad" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="vencantventas" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="venseteocantidad" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="vencambiarpin" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <index name="cliente" unique="false" columns="cliente"/>
+      <index name="domicilio" unique="false" columns="domicilio"/>
+      <index name="medidor" unique="false" columns="nserie1,nserie2,nserie3"/>
+      <index name="terreno" unique="false" columns="terreno"/>
+    </table>
+    <table name="tipdeuda" schema="" catalog="energia" type="TABLE">
+      <column name="coddeuda" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="40" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="activo" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="cuenta" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MTA="/>
+      <index name="coddeuda" unique="false" columns="coddeuda"/>
+      <index name="descrip" unique="false" columns="descrip"/>
+    </table>
+    <table name="tipmov" schema="" catalog="energia" type="TABLE">
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="40" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="codigo" unique="false" columns="codigo"/>
+      <index name="descrip" unique="false" columns="descrip"/>
+    </table>
+    <table name="tipoaud" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="50" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <index name="descrip" unique="false" columns="descrip"/>
+      <index name="tipo" unique="false" columns="tipo"/>
+    </table>
+    <table name="tiposdeb" schema="" catalog="energia" type="TABLE">
+      <column name="tipodeb" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="descrip" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="activo" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="descrip" unique="false" columns="descrip"/>
+      <index name="tipodeb" unique="false" columns="tipodeb"/>
+    </table>
+    <table name="tranfac" schema="" catalog="energia" type="TABLE">
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipmov" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="forpag" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="importe" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="pdaproc" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="factura" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <index name="tsnt" unique="false" columns="sucursal,numero,tipmov,tipo"/>
+    </table>
+    <table name="tranncre" schema="" catalog="energia" type="TABLE">
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nrocja" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="planilla" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nromov" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+    </table>
+    <table name="usr_mod" schema="" catalog="energia" type="TABLE">
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="modulo" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="lect" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="escr" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="borr" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="impr" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="alect" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="aescr" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="aborr" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="aimpr" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="usuario" unique="false" columns="usuario,modulo"/>
+    </table>
+    <table name="usuarios" schema="" catalog="energia" type="TABLE">
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nombre" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="fullname" sqlType="CHAR" precision="40" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="password" sqlType="CHAR" precision="5" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="vence" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="tieneven" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="flag" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="autoriza" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <index name="nombre" unique="false" columns="nombre"/>
+      <index name="usuario" unique="false" columns="usuario"/>
+    </table>
+    <table name="v_auditar" schema="" catalog="energia" type="VIEW">
+      <column name="usuario" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="estacion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="modulo" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="contenido" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="accion" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="nomusuario" sqlType="CHAR" precision="20" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+    </table>
+    <table name="ven_auditoria" schema="" catalog="energia" type="TABLE">
+      <column name="codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="hora" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12"/>
+      <column name="detalle" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="sesion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="codigo"/>
+    </table>
+    <table name="ven_fotos" schema="" catalog="energia" type="TABLE">
+      <column name="fot_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="fot_nombre" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fot_tiempo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="fot_codigo"/>
+    </table>
+    <table name="ven_seteos" schema="" catalog="energia" type="TABLE">
+      <column name="set_timeout" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="set_renglonc1" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="set_renglonc2" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="set_renglonc3" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="set_renglonc4" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="set_renglonf1" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="set_renglonf2" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="set_renglonf3" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="set_renglonf4" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="set_largorollo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="set_largoticket" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="set_cantidadticket" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="set_puntoreprollo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="set_cuentasup" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="set_pinsup" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="set_importe1" sqlType="DOUBLE" precision="15" scale="3" nullable="true" jdbcType="8" def="MC4wMDA="/>
+      <column name="set_importe2" sqlType="DOUBLE" precision="15" scale="3" nullable="true" jdbcType="8" def="MC4wMDA="/>
+      <column name="set_importe3" sqlType="DOUBLE" precision="15" scale="3" nullable="true" jdbcType="8" def="MC4wMDA="/>
+      <column name="set_cantidadventas" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="set_ticketsimpresos" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="set_rollobig" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="set_anchoticket" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="set_desactivado" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+    </table>
+    <table name="ventas" schema="" catalog="energia" type="TABLE">
+      <column name="tipcom" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="codcon" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nomcon" sqlType="CHAR" precision="25" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="codcli" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nomcli" sqlType="CHAR" precision="30" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="tipiva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nrcuit" sqlType="CHAR" precision="13" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="nrinbr" sqlType="CHAR" precision="13" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="fecfac" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="letfac" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="nropref" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="nrocom" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="poriva" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="poriva2" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="poriva3" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="neto" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="exento" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="impint" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="ivains" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="ivanin" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="retenc" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="retib" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="gastos" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="total1" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="total2" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="total" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="neto2" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="ivains2" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="ivanin2" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="neto3" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="ivains3" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="ivanin3" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+    </table>
+    <table name="vis_cfe1" schema="" catalog="energia" type="VIEW">
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="razon" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MQ=="/>
+      <column name="punitario" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="descuento" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="desimporte" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="coddeuda" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="numero_cui" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="credito" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MQ=="/>
+      <column name="succre" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numcre" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="convenio" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="metros" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+    </table>
+    <table name="vis_cfe2" schema="" catalog="energia" type="VIEW">
+      <column name="fecha" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="razon" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="cond_iva" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="tipo" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="sucursal" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="anulada" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="MQ=="/>
+      <column name="punitario" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="descuento" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="desimporte" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+      <column name="item" sqlType="CHAR" precision="15" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="alicuota" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="coddeuda" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="numero_cui" sqlType="DECIMAL" precision="18" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="terreno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="tipncre" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" def="Jyc="/>
+      <column name="cliente" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="convenio" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3" def="MA=="/>
+      <column name="metros" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8" def="MA=="/>
+    </table>
+  </data-source>
+</component>
