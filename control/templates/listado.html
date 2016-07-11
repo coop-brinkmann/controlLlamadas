@@ -96,7 +96,12 @@
                     });
                 }, "json");
 
-                $("tfoot select:nth-of-type(2)").append('<option value="true">SI</option>');
+                $($("tfoot select")[1]).append($('<option value="true">SI</option>'));
+                $($("tfoot select")[1]).append($('<option value="false">NO</option>'));
+
+                $($("tfoot select")[2]).append($('<option value="TE">TELECOM</option>'));
+                $($("tfoot select")[2]).append($('<option value="CO">COLSECOR</option>'));
+                $($("tfoot select")[2]).append($('<option value="NA">NO APLICA</option>'));
 
             });
         });
