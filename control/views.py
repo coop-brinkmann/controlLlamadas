@@ -2,6 +2,8 @@ import json
 import re
 from datetime import datetime, timedelta
 from StringIO import StringIO
+
+import math
 from django.core import serializers
 from django.db.models.aggregates import Count, Sum
 from django.db.models.query_utils import Q
@@ -55,7 +57,7 @@ def importar_lama(request):
                 if numero_b.startswith('400') or numero_b.startswith('455') or numero_b.startswith(
                         '401'):  # LLAMADA LOCAL
                     numero_b = '3562' + numero_b
-                duracion = int(linea[44:51].strip()) / 60 + 1
+                duracion = int(math.ceil(float(linea[44:51].strip()) / 60))
                 clave = int(linea[51:54].strip())
                 corredor = "NA"
                 if linea[68:75].startswith("1-5-1"):
@@ -132,7 +134,7 @@ def importar_ama(request):
                     if qs:
                         celular = True
                         break
-                duracion = int(linea[68:72].strip()) / 60 + 1
+                duracion = int(math.ceil(float(linea[68:72].strip()) / 60))
                 corredor = "NA"
                 if linea[0:6] == "COSEL7":
                     corredor = "CO"
@@ -188,13 +190,12 @@ def llamadas_datatables_view(request):
     queries = []
     for item in list_global_search:
         queries.append(Q(**{item + '__icontains': search}))
-    qg = reduce(lambda x, y: x | y, queries)
     for k, v in individual_searchs_i.iteritems():
         if v == 'false':
             queries.append(Q(**{dict_pos_names[k]: False}))
-        if v == 'true':
+        elif v == 'true':
             queries.append(Q(**{dict_pos_names[k]: True}))
-        if k == 0:
+        elif k == 0:
             desde = datetime.strptime(v.split("&&")[0], "%d-%m-%Y")
             hasta = datetime.strptime(v.split("&&")[1], "%d-%m-%Y") + timedelta(hours=23, minutes=59, seconds=59)
             queries.append(Q(**{dict_pos_names[k] + '__range': (desde, hasta)}))
