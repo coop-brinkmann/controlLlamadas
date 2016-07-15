@@ -1,14 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Importacion LAMA</title>
-</head>
-<body>
-<form action="/lama/" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit"/>
-</form>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block siteTitle %}
+    Control de Llamadas - Importación LAMA
+{% endblock %}
+
+{% block pageTitle %}
+    Importación de archivo LAMA
+{% endblock %}
+
+{% block pageContent %}
+    <div class="section">
+        <div class="row">
+            <form class="col l12">
+                {% csrf_token %}
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>LAMA</span>
+                        {{ form.lama }}
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path" type="text">
+                    </div>
+                </div>
+                <input class="btn" type="submit" value="Importar"/>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,14 +1,49 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>HOME DE CONTROL LLAMADAS</title>
-</head>
-<body>
-<ul>
-    <li><a href="{% url "importar_lama" %}">Importar LAMA</a></li>
-    <li><a href="{% url "importar_ama" %}">Importar AMA</a></li>
-    <li><a href="{% url "listado_llamadas" %}">Listar llamadas</a></li>
-</ul>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block siteTitle %}
+    Control de Llamadas - Home
+{% endblock %}
+
+{% block pageTitle %}
+    Home
+{% endblock %}
+
+{% block pageContent %}
+    <div class="section">
+        <div class="row">
+            <div class="col l4">
+                <div class="card small z-depth-2 blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">LAMA</span>
+                        <p>Relacionado a archivos LAMA/SDE y TelcoIP de llamadas salientes.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url "importar_lama" %}">Importar LAMA</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col l4">
+                <div class="card small z-depth-2 blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">AMA</span>
+                        <p>Relacionado con los archivos AMA de llamadas entrantes.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url "importar_ama" %}">Importar AMA</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col l4">
+                <div class="card small z-depth-2 blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">LLAMADAS</span>
+                        <p>Relacionado con las llamadas importadas de los archivos anteriores.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url "listado_llamadas" %}">Ver detalle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

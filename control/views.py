@@ -91,6 +91,8 @@ def importar_ama(request):
         # create a form instance and populate it with data from the request:
         form = AmaForm(request.POST, request.FILES)
         # check whether it's valid:
+        form.is_valid()
+        print form.errors
         if form.is_valid():
             # process the data in form.cleaned_data as required
             ama = request.FILES['ama']
@@ -187,22 +189,26 @@ def llamadas_datatables_view(request):
 
     # Filtrado de los articulos
     search = request.GET['search[value]']
-    queries = []
+    queriesg = []
     for item in list_global_search:
-        queries.append(Q(**{item + '__icontains': search}))
+        queriesg.append(Q(**{item + '__icontains': search}))
+    qsg = reduce(lambda x, y: x | y, queriesg)
+    print qsg
+    queriesi = []
     for k, v in individual_searchs_i.iteritems():
         if v == 'false':
-            queries.append(Q(**{dict_pos_names[k]: False}))
+            queriesi.append(Q(**{dict_pos_names[k]: False}))
         elif v == 'true':
-            queries.append(Q(**{dict_pos_names[k]: True}))
+            queriesi.append(Q(**{dict_pos_names[k]: True}))
         elif k == 0:
             desde = datetime.strptime(v.split("&&")[0], "%d-%m-%Y")
             hasta = datetime.strptime(v.split("&&")[1], "%d-%m-%Y") + timedelta(hours=23, minutes=59, seconds=59)
-            queries.append(Q(**{dict_pos_names[k] + '__range': (desde, hasta)}))
+            queriesi.append(Q(**{dict_pos_names[k] + '__range': (desde, hasta)}))
         else:
-            queries.append(Q(**{dict_pos_names[k] + '__icontains': v}))
-    qs = reduce(lambda x, y: x & y, queries)
-    objects = objects.filter(qs)
+            queriesi.append(Q(**{dict_pos_names[k] + '__icontains': v}))
+    qsi = reduce(lambda x, y: x & y, queriesi) if queriesi else None
+    print qsi
+    objects = objects.filter(qsg & qsi) if qsi else objects.filter(qsg)
 
     # Ordenado
     order = dict(enumerate(list_real_names))

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block siteTitle %}{% endblock %}</title>
+    <!-- Compiled and minified jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    {% block headExtras %}{% endblock %}
+</head>
+<body>
+<nav class="indigo darken-3 z-depth-3">
+    <div class="nav-wrapper">
+        <a href="{% url "home" %}" class="brand-logo center">{% block pageTitle %}{% endblock %}</a>
+    </div>
+</nav>
+<div class="container">
+    {% block pageContent %}{% endblock %}
+</div>
+
+</body>
+</html>

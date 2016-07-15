@@ -1,14 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Importacion AMA</title>
-</head>
-<body>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit"/>
-</form>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block siteTitle %}
+    Control de Llamadas - Importación AMA
+{% endblock %}
+
+{% block pageTitle %}
+    Importación de archivo AMA
+{% endblock %}
+
+{% block pageContent %}
+    <div class="section">
+        <div class="row">
+            <form method="post" class="col l6" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>AMA</span>
+                        {{ form.ama }}
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path" type="text">
+                    </div>
+                </div>
+                <input class="btn" type="submit" value="Importar"/>
+            </form>
+            <div class="col l6">
+                {{ form.ama.errors }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
