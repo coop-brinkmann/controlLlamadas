@@ -11,7 +11,19 @@
 
 <h2>REGISTROS DUPLICADOS: {{ registros_duplicados }}</h2>
 
-<h2>REGISTROS INSERTADOS_ {{ registros_insertados }}</h2>
+<h2>REGISTROS INSERTADOS: {{ registros_insertados }}</h2>
+
+<h2>REGISTROS TOTALES: {{ registros_totales }}</h2>
+{% if coincide_suma %}
+    <h2>OK</h2>
+{% else %}
+    <h2>NO OK</h2>
+{% endif %}
+
+<h2>DETALLE REG DUPLICADOS:</h2>
+{% for detalle_duplicado in detalle_duplicados %}
+    <p>{{ detalle_duplicado }}</p>
+{% endfor %}
 
 <a href="{% url "home" %}"></a>
 </body>

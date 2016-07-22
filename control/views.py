@@ -32,6 +32,8 @@ def importar_lama(request):
             registros_saltados = 0
             registros_duplicados = 0
             registros_insertados = 0
+            duplicados = []
+            registros_totales = len(lama.readlines()) - 3
             for linea in lama:
                 continua = True if linea[64] == '*' else False
                 if registros_saltados <= 2 or continua:
@@ -50,13 +52,63 @@ def importar_lama(request):
                 fecha_hora = datetime.strptime(linea[30:44], "%y-%m-%d %H:%M")
                 numero_b = linea[13:30].strip()
                 tipo_llamada = "SA"
-                match = re.match(r'^\d{3,5}15', numero_b)
                 celular = False
-                if match or numero_b.startswith("15"):
-                    celular = True
                 if numero_b.startswith('400') or numero_b.startswith('455') or numero_b.startswith(
-                        '401'):  # LLAMADA LOCAL
+                        '401') or len(numero_b) == 6:  # LLAMADA LOCAL
                     numero_b = '3562' + numero_b
+                if numero_b[0] == "0" and numero_b[1] != "8":
+                    numero_b = numero_b[1:]
+                if numero_b.startswith("15"):
+                    numero_b = '3562' + numero_b[2:]
+                    celular = True
+
+                match1 = re.match(r'^\d{2}15', numero_b)
+                match2 = re.match(r'^\d{3}15', numero_b)
+                match3 = re.match(r'^\d{4}15', numero_b)
+                if match3:
+                    caracteristica = numero_b[0:4]
+                    movqs = Prefijo.objects.filter(modalidad="MOV", caracteristica=caracteristica)
+                    if movqs:
+                        a = 0
+                        resultado = ""
+                        while a < len(numero_b):
+                            resultado += numero_b[a]
+                            if a == 3:
+                                a = 6
+                            else:
+                                a += 1
+                        numero_b = resultado
+                        celular = True
+
+                elif match2:
+                    caracteristica = numero_b[0:3]
+                    movqs = Prefijo.objects.filter(modalidad="MOV", caracteristica=caracteristica)
+                    if movqs:
+                        a = 0
+                        resultado = ""
+                        while a < len(numero_b):
+                            resultado += numero_b[a]
+                            if a == 2:
+                                a = 5
+                            else:
+                                a += 1
+                        numero_b = resultado
+                        celular = True
+                elif match1:
+                    caracteristica = numero_b[0:2]
+                    movqs = Prefijo.objects.filter(modalidad="MOV", caracteristica=caracteristica)
+                    if movqs:
+                        a = 0
+                        resultado = ""
+                        while a < len(numero_b):
+                            resultado += numero_b[a]
+                            if a == 1:
+                                a = 4
+                            else:
+                                a += 1
+                        numero_b = resultado
+                        celular = True
+
                 duracion = int(math.ceil(float(linea[44:51].strip()) / 60))
                 clave = int(linea[51:54].strip())
                 corredor = "NA"
@@ -70,12 +122,22 @@ def importar_lama(request):
                 if creado:
                     registros_insertados += 1
                 else:
+                    boolean_celular = "Si" if celular == True else "No"
+                    duplicados.append(
+                        "F/H:%s -- A:%s -- B:%s -- Celular:%s -- Tipo:%s -- Duracion:%smin -- Corredor:%s" % (
+                            fecha_hora, numero_a, numero_b, boolean_celular, tipo_llamada, duracion, corredor))
                     registros_duplicados += 1
+            registros_saltados -= 3
+            coincide_suma = True if (
+                                    registros_duplicados + registros_saltados + registros_insertados) == registros_totales else False
             # ...
             # redirect to a new URL:
             return render_to_response("lama_success.html", {"registros_saltados": registros_saltados,
                                                             "registros_duplicados": registros_duplicados,
-                                                            "registros_insertados": registros_insertados})
+                                                            "registros_insertados": registros_insertados,
+                                                            "registros_totales": registros_totales,
+                                                            "coincide_suma": coincide_suma,
+                                                            "detalle_duplicados": duplicados})
 
 
     # if a GET (or any other method) we'll create a blank form
@@ -98,6 +160,7 @@ def importar_ama(request):
             registros_duplicados = 0
             registros_insertados = 0
             duplicados = []
+            registros_totales = len(ama.readlines()) - 3
             for linea in ama:
                 if linea[64] == '*' or linea[9:19].startswith("3562401") or linea[9:19] == '3562455997':
                     continua = True
@@ -146,15 +209,21 @@ def importar_ama(request):
                 if creado:
                     registros_insertados += 1
                 else:
+                    boolean_celular = "Si" if celular == True else "No"
                     duplicados.append(
                         "F/H:%s -- A:%s -- B:%s -- Celular:%s -- Tipo:%s -- Duracion:%s -- Corredor:%s" % (
-                            fecha_hora, numero_a, numero_b, celular, tipo_llamada, duracion, corredor))
+                            fecha_hora, numero_a, numero_b, boolean_celular, tipo_llamada, duracion, corredor))
                     registros_duplicados += 1
+            registros_saltados -= 3
+            coincide_suma = True if (
+                                    registros_duplicados + registros_saltados + registros_insertados) == registros_totales else False
             # ...
             # redirect to a new URL:
             return render_to_response("ama_success.html", {"registros_saltados": registros_saltados,
                                                            "registros_duplicados": registros_duplicados,
                                                            "registros_insertados": registros_insertados,
+                                                           "registros_totales": registros_totales,
+                                                           "coincide_suma": coincide_suma,
                                                            "detalle_duplicados": duplicados})
 
 
@@ -181,7 +250,7 @@ def llamadas_datatables_view(request):
     list_global_search = ['numero_a', 'numero_b']
     dict_pos_names = {0: 'fecha_hora', 1: 'tipo', 2: 'numero_a', 3: 'numero_b', 4: 'celular', 5: 'duracion', 6: 'clave',
                       7: 'corredor'}
-    print "INDIV SEARCH: %s" %individual_searchs_i
+    print "INDIV SEARCH: %s" % individual_searchs_i
     # Cuenta total de articulos:
     recordsTotal = objects.count()
 
@@ -214,7 +283,6 @@ def llamadas_datatables_view(request):
     recordsFiltered = objects.count()
     agg = objects.aggregate(Count('numero_a'), Sum('duracion'))
 
-
     # finally, slice according to length sent by dataTables:
     start = int(request.GET['start'])
     length = int(request.GET['length'])
@@ -226,7 +294,6 @@ def llamadas_datatables_view(request):
     for obj in objects:
         row = map(lambda field: getattr(obj, field), list_display)
         data.append(row)
-
 
     # define response
     response = {
