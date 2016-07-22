@@ -1,12 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Listado de llamadas</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+{% extends "base.html" %}
+
+{% block siteTitle %}
+    Control de Llamadas - Listado de Llamadas
+{% endblock %}
+
+{% block headExtras %}
     <script src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.6/css/jquery.dataTables.css"/>
     <style>
+        table.dataTable thead .sorting {
+            background-repeat: no-repeat;
+            background-position: center right;
+            background-image: url("sort_both.png");
+        }
+
+        table.dataTable thead .sorting_asc {
+            background-repeat: no-repeat;
+            background-position: center right;
+            background-image: url("sort_asc.png");
+        }
+
+        table.dataTable thead .sorting_desc {
+            background-repeat: no-repeat;
+            background-position: center right;
+            background-image: url("sort_desc.png");
+        }
+
+        table.dataTable thead .sorting_asc_disabled {
+            background-repeat: no-repeat;
+            background-position: center right;
+            background-image: url("sort_asc_disabled.png");
+        }
+
+        table.dataTable thead .sorting_desc_disabled {
+            background-repeat: no-repeat;
+            background-position: center right;
+            background-image: url("sort_desc_disabled.png");
+        }
+
+        .dataTables_wrapper .dataTables_filter {
+            width: 30rem;
+        }
+
+        .dataTables_wrapper .dataTables_filter i {
+            font-size: 2rem;
+            float: left;
+            margin-right: .5rem;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            width: calc(100% - 7rem);
+        }
+
+        .dataTables_wrapper .dataTables_filter .btn-floating {
+            margin-right: .5rem;
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            font-size: .9rem;
+            float: left;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            padding-top: 0.25em;
+        }
+
+        .dataTables_wrapper .dataTables_paginate a {
+            margin: 0 .5rem;
+        }
+
+        .dataTables_wrapper .dataTables_processing {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 40px;
+            margin-left: -50%;
+            margin-top: -25px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            background-color: white;
+            background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(25%, rgba(255, 255, 255, 0.9)), color-stop(75%, rgba(255, 255, 255, 0.9)), color-stop(100%, rgba(255, 255, 255, 0)));
+            background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+            background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+            background: -ms-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+            background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+        }
+
+        .dataTables_wrapper:after {
+            visibility: hidden;
+            display: block;
+            content: "";
+            clear: both;
+            height: 0;
+        }
+
+        @media screen and (max-width: 360px) {
+            .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate {
+                float: none;
+                text-align: center;
+            }
+
+            .dataTables_wrapper .dataTables_paginate {
+                margin-top: 0.5em;
+            }
+
+        }
+
+        @media screen and (max-width: 768px) {
+            .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
+                float: none;
+                text-align: center;
+            }
+
+            .dataTables_wrapper .dataTables_filter {
+                margin-top: 0.5em;
+            }
+
+        }
+
         div#cont {
             display: block;
             margin-top: 20px;
@@ -32,119 +146,128 @@
         }
 
     </style>
-    <script>
-        $(document).ready(function () {
-            var tabla = $('#llamadas').DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/725b2a2115b/i18n/Spanish.json"
-                },
-                "processing": true,
-                "serverSide": true,
-                "ajax": "{% url "llamadas_dt" %}",
-                "order": [[1, "desc"]],
-                "orderMulti": false,
-                "search": {
-                    "caseInsensitive": true
-                }
-            });
+{% endblock %}
 
+{% block pageTitle %}
+Listado de Llamadas
+{% endblock %}
 
-            $('#llamadas')
-                    .on('xhr.dt', function (e, settings, json, xhr) {
-                        $('#cantidad_llamadas').text('CANTIDAD LLAMADAS: ' + json.total_llamadas);
-                        $('#total_minutos').text('TOTAL MINUTOS: ' + json.total_minutos);
-                    });
-
-            tabla.on('init.dt', function () {
-                // Apply the search
-                tabla.columns([2, 3, 6]).every(function () {
-                    var that = this;
-                    $('input', this.footer()).on('keyup', function () {
-                        console.log(this);
-                        if (that.search() !== this.value) {
-                            that
-                                    .search(this.value)
-                                    .draw();
-                        }
-                    });
-                });
-
-                tabla.columns([1, 4, 7]).every(function () {
-                    var column = this;
-                    var select = $('<select><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
-                            .on('change', function () {
-                                var val = $(this).val();
-                                column.search(val).draw();
-                            });
-
-                });
-
-                $("tfoot #filtrar").on('click', function(){
-                    if ($("#desde").val() && $("#hasta").val()) {
-                        var busq = $("#desde").val()+'&&'+$("#hasta").val();
-                        tabla.column(0).search(busq).draw();
-                    }
-                    else {
-                        tabla.column(0).search("").draw();
-                    }
-                });
-
-                $.get("/api/get_tipos_llamadas_distinct/", function (data) {
-                    $.each(data, function () {
-                        $("tfoot select:first").append('<option value="' + this + '">' + this + '</option>');
-                    });
-                }, "json");
-
-                $($("tfoot select")[1]).append($('<option value="true">SI</option>'));
-                $($("tfoot select")[1]).append($('<option value="false">NO</option>'));
-
-                $($("tfoot select")[2]).append($('<option value="TE">TELECOM</option>'));
-                $($("tfoot select")[2]).append($('<option value="CO">COLSECOR</option>'));
-                $($("tfoot select")[2]).append($('<option value="NA">NO APLICA</option>'));
-
-            });
-        });
-    </script>
-</head>
-<body>
-<div id="cont">
-    <table id="llamadas" class="display">
-        <thead>
-        <tr>
-            <th>Fecha-Hora</th>
-            <th>Tipo</th>
-            <th>Número A</th>
-            <th>Número B</th>
-            <th>Celular?</th>
-            <th>Duración</th>
-            <th>Clave</th>
-            <th>Corredor</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-        <tfoot>
-        <tr>
-            <th>
-                <input style="display: block;" type="text" id="desde" name="desde" placeholder="Fecha desde">
-                <input style="display: block;" type="text" id="hasta" name="hasta" placeholder="Fecha hasta">
-                <button style="display: block;margin: auto;" type="button" id="filtrar">Filtrar</button>
-            </th>
-            <th><input type="text" placeholder="Busca Tipo"/></th>
-            <th><input type="text" placeholder="Busca A"/></th>
-            <th><input type="text" placeholder="Busca B"/></th>
-            <th><input type="text" placeholder="Busca Cel"/></th>
-            <th></th>
-            <th><input type="text" placeholder="Busca Clave"/></th>
-            <th><input type="text" placeholder="Busca Corredor"/></th>
-        </tr>
-        </tfoot>
-    </table>
-</div>
+{% block pageContent %}
+<table id="llamadas" class="datatable">
+    <thead>
+    <tr>
+        <th>Fecha-Hora</th>
+        <th style="width: 20px;">Tipo</th>
+        <th>Número A</th>
+        <th>Número B</th>
+        <th style="width: 25px;">Cel?</th>
+        <th style="width: 20px;">Dur.</th>
+        <th style="width: 20px;">Cla.</th>
+        <th>Corredor</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+    <tr>
+        <th>
+            <input style="display: block;" type="text" id="desde" name="desde" placeholder="Fecha desde">
+            <input style="display: block;" type="text" id="hasta" name="hasta" placeholder="Fecha hasta">
+            <button style="display: block;margin: auto;" type="button" id="filtrar">Filtrar</button>
+        </th>
+        <th><input type="text" placeholder="Busca Tipo"/></th>
+        <th><input type="text" placeholder="Busca A"/></th>
+        <th><input type="text" placeholder="Busca B"/></th>
+        <th><input type="text" placeholder="Busca Cel"/></th>
+        <th></th>
+        <th><input type="text" placeholder="Busca Clave"/></th>
+        <th><input type="text" placeholder="Busca Corredor"/></th>
+    </tr>
+    </tfoot>
+</table>
 <footer>
     <h3 id="cantidad_llamadas"></h3>
 
     <h3 id="total_minutos"></h3>
 </footer>
-</body>
-</html>
+<script>
+    $(document).ready(function () {
+        var tabla = $('#llamadas').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/725b2a2115b/i18n/Spanish.json"
+            },
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{% url "llamadas_dt" %}",
+            "order": [[0, "desc"]],
+            "orderMulti": false,
+            "search": {
+                "caseInsensitive": true
+            }
+        });
+
+
+        $('#llamadas')
+                .on('xhr.dt', function (e, settings, json, xhr) {
+                    $('#cantidad_llamadas').text('CANTIDAD LLAMADAS: ' + json.total_llamadas);
+                    $('#total_minutos').text('TOTAL MINUTOS: ' + json.total_minutos);
+                });
+
+        tabla.on('init.dt', function () {
+            // Apply the search
+            tabla.columns([2, 3, 6]).every(function () {
+                var that = this;
+                $('input', this.footer()).on('keyup', function () {
+                    console.log(this);
+                    if (that.search() !== this.value) {
+                        that
+                                .search(this.value)
+                                .draw();
+                    }
+                });
+            });
+
+            tabla.columns([1, 4, 7]).every(function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $(this).val();
+                            column.search(val).draw();
+                        });
+
+            });
+
+            $("tfoot #filtrar").on('click', function () {
+                if ($("#desde").val() && $("#hasta").val()) {
+                    var busq = $("#desde").val() + '&&' + $("#hasta").val();
+                    tabla.column(0).search(busq).draw();
+                }
+                else {
+                    tabla.column(0).search("").draw();
+                }
+            });
+
+            $.get("/api/get_tipos_llamadas_distinct/", function (data) {
+                $.each(data, function () {
+                    $("tfoot select:first").append('<option value="' + this + '">' + this + '</option>');
+                });
+                $('tfoot select:first').material_select();
+            }, "json");
+
+            $($("tfoot select")[1]).append($('<option value="true">SI</option>'));
+            $($("tfoot select")[1]).append($('<option value="false">NO</option>'));
+
+            $($("tfoot select")[2]).append($('<option value="TE">TELECOM</option>'));
+            $($("tfoot select")[2]).append($('<option value="CO">COLSECOR</option>'));
+            $($("tfoot select")[2]).append($('<option value="NA">NO APLICA</option>'));
+
+            $('select').material_select();
+
+        });
+    });
+</script>
+{% endblock %}
+
+
+
+

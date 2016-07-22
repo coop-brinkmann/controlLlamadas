@@ -1,30 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Importacion LAMA completa</title>
-</head>
-<body>
-<h1>COMPLETADA IMPORTACION DE LAMA</h1>
+{% extends "base.html" %}
 
-<h2>REGISTROS SALTADOS: {{ registros_saltados }}</h2>
+{% block siteTitle %}
+    Control de Llamadas - Importacion LAMA exitosa
+{% endblock %}
 
-<h2>REGISTROS DUPLICADOS: {{ registros_duplicados }}</h2>
+{% block pageTitle %}
+    Importación de archivo LAMA exitosa
+{% endblock %}
 
-<h2>REGISTROS INSERTADOS: {{ registros_insertados }}</h2>
+{% block pageContent %}
+    <h2>COMPLETADA IMPORTACION DE LAMA</h2>
 
-<h2>REGISTROS TOTALES: {{ registros_totales }}</h2>
-{% if coincide_suma %}
-    <h2>OK</h2>
-{% else %}
-    <h2>NO OK</h2>
-{% endif %}
+    <h3>REGISTROS SALTADOS: {{ registros_saltados }}</h3>
 
-<h2>DETALLE REG DUPLICADOS:</h2>
-{% for detalle_duplicado in detalle_duplicados %}
-    <p>{{ detalle_duplicado }}</p>
-{% endfor %}
+    <h3>REGISTROS DUPLICADOS: {{ registros_duplicados }}</h3>
 
-<a href="{% url "home" %}"></a>
-</body>
-</html>
+    <h3>REGISTROS INSERTADOS: {{ registros_insertados }}</h3>
+
+    <h3>DETALLE REG DUPLICADOS:</h3>
+    {% for detalle_duplicado in detalle_duplicados %}
+        <p>{{ detalle_duplicado }}</p>
+    {% endfor %}
+{% endblock %}
